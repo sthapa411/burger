@@ -1,0 +1,26 @@
+var mysql = require("mysql");
+
+//for burgerdb
+var connection;
+if (process.env.BURGERDB_URL){
+  connection = mysql.createConnection(process.env.BURGERDB_URL);
+} else {
+     // DB is local on localhost
+connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "password",
+  database: "burgers_db"
+});
+}
+
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
+});
+
+module.exports = connection;
