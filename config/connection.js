@@ -2,8 +2,8 @@ var mysql = require("mysql");
 
 //for burgerdb
 var connection;
-if (process.env.BURGERDB_URL){
-  connection = mysql.createConnection(process.env.BURGERDB_URL);
+if (process.env.JAWSDB_URL){
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
      // DB is local on localhost
 connection = mysql.createConnection({
