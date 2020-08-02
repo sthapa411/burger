@@ -3,11 +3,11 @@ var express = require("express");
 var router = express.Router();
 
 // Import the model burger.js
-var burgers = require("../models/burgers.js");
+var burgers = require("../models/burger.js");
 
 // Create routes
 router.get("/", function(req, res) {
-    burgers.all(function(data) {
+    burgers.selectAll(function(data) {
       var hbsObject = {
         burgers: data
       };
@@ -40,7 +40,7 @@ router.put("/api/burgers/:id", function(req, res) {
       },
       condition,
       function(result) {
-        if (result.changedRows === 0) {
+        if ((result.changedRows === 0)) {
           // If no rows were changed, then the ID must not exist, so 404
           return res.status(404).end();
         }

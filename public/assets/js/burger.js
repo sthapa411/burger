@@ -16,7 +16,7 @@ console.log(newBurger)
       data: newBurger
     }).then(
       function() {
-        console.log("created new burger");
+        console.log("New burger added");
         // Reload the page to get the updated list
         location.reload();
       }

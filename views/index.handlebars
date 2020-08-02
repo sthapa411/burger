@@ -1,5 +1,5 @@
 <div class="container">
-<img class="img-fluid" src="burger.jpg">
+<img class="img-fluid" src="./public/assests/images/burger.png">
 
 
 <h1>Eat-the-Burger</h1>
@@ -9,7 +9,7 @@
 <ul>
   {{#each burgers}}
       {{#unless eaten}}
-    {{> burger-block devour=false}}
+    {{> burger-block eaten=false}}
         {{/unless}}
   {{/each}}
 </ul>
@@ -20,7 +20,7 @@
 <ul>
   {{#each burgers}}
       {{#if eaten}}
-    {{> burger-block devour=true}}
+    {{> burger-block eaten=true}}
         {{/if}}
   {{/each}}
 </ul>
