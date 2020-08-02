@@ -5,6 +5,12 @@ var router = express.Router();
 // Import the model burger.js
 var burgers = require("../models/burger.js");
 
+app.get("/", function(req, res) {
+  res.json(path.join(__dirname, "public/index.html"));
+});
+
+
+
 // Create routes
 router.get("/", function(req, res) {
     burgers.selectAll(function(data) {
