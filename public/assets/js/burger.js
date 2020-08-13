@@ -1,48 +1,47 @@
 $(function() {
 
-  $(".create-form").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
+  $(".create-form").on("submit", function(event){
+      event.preventDefault();
 
-    var newBurger = {
-      name: $("#burger").val().trim(),
-      eaten: '0'
-    };
-console.log(newBurger)
-
-    // Send the POST request.
-    $.ajax("/api/burgers", {
+      var newBurger = {
+          burger_name: $("#newburger")
+          .val()
+          .trim(),
+          devoured: 0
+      };
+  $.ajax("/api/burgers", {
       type: "POST",
       data: newBurger
-    }).then(
-      function() {
-        console.log("New burger added");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+  }).then(function(){
+      console.log("New burger added");
+      location.reload();
+  });
   });
 
-  $(".eat").on("click", function(event) {
-    var id = $(this).data("id");
-    var newEaten = $(this).data("neweaten") === false;
+  $(".eatburger").on("click", function(event){
+      event.preventDefault();
+      var id = $(this).data("id");
+      var devouredState = {
+          devoured: 1
+      };
+      $.ajax("/api/burgers/" + id, {
+          type: "PUT",
+          data: devouredState
+      }).then(function(){
+          console.log("Burger devoured");
+          location.reload();
+      });
+  
+      $(".trashburger").on("click", function(event){
+          event.preventDefault();
+          var id = $(this).data("id");
+          $.ajax({
+              type: "DELETE",
+              url: "/api/burgers/" + id
+          }).then(location.reload());
+          });
 
-    var newEatenState = {
-      eaten:  newEaten
-    };
-    console.log('id:' + id)
-    console.log('eaten:' + newEatenState.eaten)
-
-    // Send the PUT request.
-    $.ajax("/api/burgers/" + id, {
-      type: "PUT",
-      data: newEatenState
-    }).then(
-      function() {
-        console.log("changed eaten state to", newEaten);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
   });
-})
+
+
+});
